@@ -103,19 +103,19 @@ These findings highlight differences in traffic quality and conversion performan
 
 ### 1. Funnel Overview
 
-![Funnel Overview](docs/dashboard-screenshots/funnel_overview.png)
+![Funnel Overview](docs/dashboard-screenshots/Funnel_Overview.png)
 
 ### 2. Device Comparison
 
-![Device Comparison](docs/dashboard-screenshots/device_comparison.png)
+![Device Comparison](docs/dashboard-screenshots/Device_Comparison.png)
 
 ### 3. Acquisition Quality
 
-![Acquisition Quality](docs/dashboard-screenshots/acquisition_quality.png)
+![Acquisition Quality](docs/dashboard-screenshots/Acquisition_Quality.png)
 
 ### 4. Trend & Diagnostics
 
-![Trend and Diagnostics](docs/dashboard-screenshots/trend_diagnostics.png)
+![Trend and Diagnostics](docs/dashboard-screenshots/Trend_Diagnostics.png)
 
 ## Recommendations for Further Investigation
 
