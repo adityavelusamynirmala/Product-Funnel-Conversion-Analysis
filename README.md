@@ -1,102 +1,164 @@
-Product Funnel & Conversion Analysis
-Project Overview
-This project analyzes an e-commerce purchase journey to understand how sessions progress through the conversion funnel and where users drop out. It compares funnel performance across devices and acquisition channels and examines how session volume and conversion change over time.
+# Product Funnel & Conversion Analysis
 
-SQL is used for data preparation and funnel analysis, while Power BI is used to build interactive dashboards for funnel performance, device comparison, acquisition quality, and trend diagnostics.
+## Project Overview
 
-Disclaimer: This project uses synthetic data for portfolio and learning purposes. It does not represent the performance of a real company, product, or customer base.
+This project analyzes the e-commerce purchase journey using synthetic session and funnel-event data. The analysis examines how users progress through different stages of the purchase funnel, identifies major drop-off points, and compares conversion performance across devices and acquisition channels.
 
-Business Problem
-An e-commerce product team wants to understand why a relatively small share of sessions result in completed purchases. The analysis focuses on how users move through the purchase journey, which funnel stages have the largest losses, and whether conversion differs by device and acquisition channel.
+SQL is used for data preparation and analysis, while Power BI is used to build interactive dashboards and visualize funnel performance.
 
-Tools Used
-SQL (SQLite): Data preparation, joins, conditional aggregation, session-level funnel construction, conversion calculations, and segmentation.
-Power BI: KPI cards, funnel visualizations, conversion and drop-off analysis, device and channel comparisons, slicers, and time-based reporting.
-Excel: Dataset inspection and validation.
-Dataset
-The project uses two synthetic datasets, each supplied in raw and cleaned form:
+> **Disclaimer:** This project uses synthetic data for portfolio and learning purposes. It does not represent the performance of a real company or product.
 
-sessions_raw.csv / sessions_clean.csv — session-level information, including session ID, user ID, session date, device, acquisition channel, landing page, and marketing campaign.
-funnel_events_raw.csv / funnel_events_clean.csv — event-level records associated with sessions, including event name and event timestamp.
-The event journey contains five key stages: landing_page, product_view, add_to_cart, checkout_started, and purchase_completed. Funnel counts are calculated at the session level so that a session is counted no more than once at each stage, even if an event is repeated.
+## Business Problem
 
-Key Findings
-The completed Power BI report shows the following results for the full dataset:
+An e-commerce product team wants to understand where users abandon the purchase journey and why overall conversion may be lower than expected.
 
-12,000 total sessions.
-8,127 sessions reached product view.
-4,110 sessions reached add to cart.
-2,520 sessions started checkout.
-1,519 sessions completed a purchase.
-12.66% overall session-to-purchase conversion rate.
-Stage-to-stage conversion rates were 67.73% from landing to product view, 50.57% from product view to cart, 61.31% from cart to checkout, and 60.28% from checkout to purchase.
-The largest absolute loss of sessions occurs between product view and add to cart (4,017 sessions), making this an important stage for further investigation.
-Android contributes the highest session volume (5,638 sessions), while iOS has the highest device-level purchase conversion (approximately 14.49%).
-Organic Search contributes the highest session volume (3,614 sessions). Paid Ads has the lowest purchase conversion among the displayed acquisition channels (approximately 10.51%).
-These are descriptive findings from synthetic data. They identify where further investigation may be useful but do not establish the reasons users abandon the funnel.
+The analysis focuses on:
 
-Analysis Approach
-Reviewed the raw session and funnel-event datasets.
-Inspected and used the cleaned session and event tables for analysis.
-Joined event records to sessions using session_id.
-Created session-level flags for landing page, product view, add to cart, checkout started, and purchase completed.
-Counted distinct sessions reaching each funnel stage to avoid inflating counts from repeated events.
-Calculated overall conversion, stage-to-stage conversion, and stage drop-off counts and rates.
-Compared funnel volume and purchase conversion across devices.
-Compared session volume, funnel progression, and purchase conversion across acquisition channels.
-Examined session volume, purchases, and conversion over time using the session date.
-Built Power BI dashboards to communicate the results and support interactive exploration.
-Dashboard Preview
-1. Funnel Overview
+- Understanding user progression through the purchase funnel.
+- Measuring conversion between consecutive funnel stages.
+- Identifying the largest drop-off points.
+- Comparing conversion performance across devices.
+- Evaluating acquisition channel performance.
+- Identifying opportunities to improve the user experience and purchase completion.
 
+## Tools Used
 
-2. Device Comparison
+- **SQL (SQLite):** Data preparation, data validation, session-level analysis, funnel conversion, and drop-off calculations.
+- **Power BI:** KPI cards, funnel visualizations, conversion analysis, device comparisons, acquisition channel analysis, and trend dashboards.
+- **Excel:** Dataset inspection and validation.
 
+## Dataset
 
-3. Acquisition Quality
+The project uses two synthetic datasets:
 
+- `sessions_raw.csv` — session-level information, including session ID, user ID, device, acquisition channel, and session date.
+- `funnel_events_raw.csv` — event-level information recording user interactions throughout the purchase journey.
 
-4. Trend & Diagnostics
+The cleaned datasets are:
 
+- `sessions_clean.csv`
+- `funnel_events_clean.csv`
 
-Recommendations for Further Investigation
-Investigate the product-view-to-add-to-cart stage, where the largest absolute session loss occurs. Review product information clarity, pricing, availability, and the visibility of the add-to-cart action.
-Compare the product and checkout experience across Android, iOS, and Desktop to identify possible usability or technical differences.
-Examine Paid Ads traffic quality by campaign, landing page, audience, and user intent before making budget decisions.
-Review checkout errors, payment failures, form completion, and page performance to understand why some sessions do not complete a purchase.
-Monitor funnel conversion over time and validate any apparent changes against traffic mix, campaign activity, and seasonality.
-These are proposed investigation steps, not confirmed causes or claims of measured product impact.
+The funnel consists of five stages:
 
-Limitations
-The dataset is synthetic and does not represent real e-commerce behaviour.
-Session-based funnel counts show whether a session reached a stage; they do not measure the order or timing of every action within a session.
-The analysis counts each session at most once per funnel stage, so repeated events do not increase stage totals.
-Acquisition cost, advertising spend, revenue, and profit are not included, so channel profitability and return on ad spend cannot be evaluated.
-Device and channel differences are descriptive associations and do not establish causation.
-Time-based patterns should be interpreted alongside changes in traffic volume and acquisition mix.
-Project Structure
-Product-Funnel-Conversion-Analysis/
+1. Landing Page
+2. Product View
+3. Add to Cart
+4. Checkout Started
+5. Purchase Completed
+
+Session-level flags are used to identify whether each session reached a particular funnel stage. This avoids inflating funnel counts when the same event is recorded multiple times within a session.
+
+## Key Findings
+
+The Power BI report shows the following results for the supplied dataset:
+
+- **12,000 total sessions** were recorded.
+- **8,127 sessions** reached the product-view stage.
+- **4,110 sessions** reached the add-to-cart stage.
+- **2,520 sessions** reached checkout.
+- **1,519 sessions** completed a purchase.
+- The overall session-to-purchase conversion rate was **12.66%**.
+
+### Funnel Conversion
+
+- Landing Page to Product View: **67.73%**
+- Product View to Add to Cart: **50.57%**
+- Add to Cart to Checkout: **61.31%**
+- Checkout Completion: **60.28%**
+
+The product-view-to-cart transition has the lowest conversion rate among the consecutive funnel stages, making it an important area for further investigation.
+
+### Device Performance
+
+- iOS recorded the highest purchase conversion rate at approximately **14.49%**.
+- Desktop recorded approximately **13.26%**.
+- Android recorded approximately **11.25%**.
+
+Android has the highest session volume but the lowest purchase conversion rate among the three devices.
+
+### Acquisition Channel Performance
+
+The report compares acquisition channels including Direct, Organic Search, Paid Ads, Referral, Social, and Unknown.
+
+Organic Search contributes the highest session volume in the dataset, while Paid Ads shows comparatively weaker purchase conversion.
+
+These findings highlight differences in traffic quality and conversion performance, but they do not establish the causes of those differences.
+
+## Analysis Approach
+
+1. Reviewed the raw session and funnel-event datasets.
+2. Inspected and validated session IDs, event names, device categories, acquisition channels, and date fields.
+3. Used SQL to prepare and standardize the datasets.
+4. Created a session-level funnel table using distinct session identifiers.
+5. Identified whether each session reached the five funnel stages.
+6. Calculated total sessions, product views, add-to-cart sessions, checkout sessions, and purchases.
+7. Calculated overall conversion and stage-to-stage conversion rates.
+8. Measured drop-offs between consecutive funnel stages.
+9. Compared funnel performance across devices and acquisition channels.
+10. Analyzed session volume, purchases, and conversion trends over time.
+11. Built interactive Power BI dashboards to present the findings.
+
+## Dashboard Preview
+
+### 1. Funnel Overview
+
+![Funnel Overview](docs/dashboard-screenshots/funnel_overview.png)
+
+### 2. Device Comparison
+
+![Device Comparison](docs/dashboard-screenshots/device_comparison.png)
+
+### 3. Acquisition Quality
+
+![Acquisition Quality](docs/dashboard-screenshots/acquisition_quality.png)
+
+### 4. Trend & Diagnostics
+
+![Trend and Diagnostics](docs/dashboard-screenshots/trend_diagnostics.png)
+
+## Recommendations for Further Investigation
+
+1. Investigate the product-view-to-cart transition to understand why a significant proportion of sessions do not add products to their carts.
+2. Review the Android shopping experience, including navigation, page performance, product presentation, and cart usability.
+3. Examine the checkout journey to identify potential friction in payment methods, form completion, and order confirmation.
+4. Investigate the quality and intent of traffic arriving through different acquisition channels.
+5. Compare conversion trends over time to identify periods of improvement or decline.
+6. Conduct usability testing and controlled experiments before implementing major changes to the purchase journey.
+
+These are proposed investigation steps, not confirmed causes of user drop-off.
+
+## Limitations
+
+- The dataset is synthetic and does not represent real e-commerce user behaviour.
+- Funnel counts are based on sessions reaching each stage, not unique users.
+- The analysis identifies associations and drop-off patterns but does not establish causation.
+- A session reaching a later funnel stage is counted at that stage even if event ordering is not validated.
+- Acquisition channel conversion differences do not account for campaign costs or customer lifetime value.
+- Further investigation and real-world experimentation would be required before making product decisions.
+
+## Project Structure
+
+```text
+product-funnel-conversion-analysis/
 ├── data/
-│   ├── raw/
-│   │   ├── sessions_raw.csv
-│   │   └── funnel_events_raw.csv
-│   └── cleaned/
-│       ├── sessions_clean.csv
-│       └── funnel_events_clean.csv
+│   ├── sessions_raw.csv
+│   ├── sessions_clean.csv
+│   ├── funnel_events_raw.csv
+│   └── funnel_events_clean.csv
 ├── sql/
-│   └── product_funnel_conversion_analysis.sql
+│   └── product_funnel_analysis.sql
 ├── powerbi/
 │   └── product_funnel_conversion_analysis.pbix
 ├── docs/
-│   ├── data_cleaning_guide.pdf
-│   ├── data_dictionary.pdf
-│   ├── project_workflow.pdf
 │   └── dashboard-screenshots/
 │       ├── funnel_overview.png
 │       ├── device_comparison.png
 │       ├── acquisition_quality.png
 │       └── trend_diagnostics.png
 └── README.md
-Skills Demonstrated
-SQL joins, CTEs, conditional aggregation, data preparation, session-level funnel analysis, conversion-rate calculation, drop-off analysis, device segmentation, acquisition-channel analysis, time-based analysis, data modeling, DAX, Power BI dashboard development, KPI development, and evidence-based product recommendations.
+```
 
+## Skills Demonstrated
+
+SQL data preparation, data validation, session-level analysis, funnel analysis, conversion rate calculation, drop-off analysis, device segmentation, acquisition channel analysis, time-series analysis, KPI development, Power BI dashboard development, and evidence-based product recommendations.
