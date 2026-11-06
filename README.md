@@ -115,7 +115,7 @@ These findings highlight differences in traffic quality and conversion performan
 
 ### 4. Trend & Diagnostics
 
-![Trend and Diagnostics](docs/dashboard-screenshots/Trend_Diagnostics.png)
+![Trend and Diagnostics](docs/dashboard-screenshots/Trend_&_Diagnostics.png)
 
 ## Recommendations for Further Investigation
 
