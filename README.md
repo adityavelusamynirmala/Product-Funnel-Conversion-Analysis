@@ -111,7 +111,7 @@ These findings highlight differences in traffic quality and conversion performan
 
 ### 3. Acquisition Quality
 
-![Acquisition Quality](docs/dashboard-screenshots/Acquisition_Quality.png)
+![Acquisition Quality](docs/dashboard-screenshots/Acquistion_Quality.png)
 
 ### 4. Trend & Diagnostics
 
